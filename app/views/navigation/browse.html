@@ -1,0 +1,61 @@
+<div class="bs-callout bs-callout-info">
+    <h4 translate="pk_browse.name"></h4>
+    <p translate="pk_browse.description"></p>
+</div>
+
+<div class="form-group">
+    <label for="selectWorkspace" translate="pk_browse.label.workspace"></label>
+    <select id="selectWorkspace" ng-model="vm.selectedWorkspace"
+            ng-options="workspace as workspace for workspace in vm.setWorkspaces"
+            ng-change="vm.changeWorkspace(vm.selectedWorkspace)"
+            style="width: 100%">
+    </select>
+</div>
+
+<div ng-show="vm.selectedWorkspace">
+    <div class="list-group panel" ng-repeat="layerGroup in vm.layerGroups">
+        <a href="" class="list-group-item" style="text-transform: capitalize;"
+           ng-click="vm.viewLayer(vm.selectedWorkspace, layerGroup.name)">
+            {{layerGroup.name}}<span class="pull-right">{{layerGroup.type}}</span>
+        </a>
+    </div>
+
+    <div ng-show="vm.displayLayer" class="form-group">
+        <label for="selectedLayer">Layer Group:</label>
+        <input type="text" id="selectedLayer" placeholder="{{vm.layerGroupName}}" disabled>
+    </div>
+
+    <div ng-show="vm.displayLayer">
+        <label for="selectedLayer">Tampilkan Layer:</label>
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="layer in vm.layers">
+                    <td>
+                        <div class="checkbox">
+                            <label><input type="checkbox" ng-model="vm.selectedLayer[layer.type]" ng-change="vm.layerSelectChange()"></label>
+                        </div>
+                    </td>
+                    <td style="vertical-align: middle;">{{layer.type}}</td>
+                    <td>
+                        <div class="btn-group navbar-right" uib-dropdown tooltip-placement="top" uib-tooltip="Download">
+                            <button id="split-button" type="button" class="btn" ng-disabled="!vm.selectedLayer[layer.type]"><i class="fa fa-download"></i></button>
+                            <button type="button" class="btn" uib-dropdown-toggle ng-disabled="!vm.selectedLayer[layer.type]">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="menuitem" style="cursor: pointer;"><a ng-click="vm.downloadLayer(layer.name, 'shapefile')">Shapefile</a></li>
+                                <li role="menuitem" style="cursor: pointer;"><a ng-click="vm.downloadLayer(layer.name, 'geojson')">GeoJSON</a></li>
+                                <li role="menuitem" style="cursor: pointer;"><a ng-click="vm.downloadLayer(layer.name, 'csv')">CSV</a></li>
+                                <li role="menuitem" style="cursor: pointer;"><a ng-click="vm.downloadLayer(layer.name, 'kml')">KML</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="width: 100%" ng-show="vm.displayLayer">
+        <button type="button" class="btn" ng-disabled="vm.disabledExport" ng-click="vm.downloadFeatureCollection()" style="width: 100%"><i class="fa fa-download"></i> Draw</button>
+    </div>
+</div>

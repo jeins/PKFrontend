@@ -1,0 +1,30 @@
+<div class="pk-content_heading">
+    <div class="pk-heading_inner">
+        <h1 style="font-size: 22px" translate="pk_register.name"></h1>
+    </div>
+</div>
+<div class="pk-content_body">
+    <uib-alert type="{{vm.alert[0].type}}" close="vm.closeAlert(0)" ng-show="vm.alert[0].show">{{vm.alert[0].message}}</uib-alert>
+    <uib-alert type="{{vm.alert[2].type}}" close="vm.closeAlert(0)" ng-show="vm.alert[2].show">{{vm.alert[2].message}}</uib-alert>
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="inputFullname" translate="pk_register.label.fullName"></label>
+                <input type="text" class="form-control" id="inputFullname" placeholder="Full Name" ng-model="vm.data.full_name" ng-disabled="vm.disabledForm">
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" translate="pk_register.label.email"></label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="vm.data.email" ng-disabled="vm.disabledForm">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" translate="pk_register.label.password"></label>
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="vm.data.password" ng-disabled="vm.disabledForm">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary" ng-click="vm.register()" style="width: 100%;" ng-disabled="vm.loading">
+                    <i ng-if="vm.loading" class='fa fa-circle-o-notch fa-spin'></i> <span translate="app.button.register"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

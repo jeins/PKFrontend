@@ -1,0 +1,16 @@
+<div ng-class="CSN.sidenavClass">
+    <div class="span3 scrollDiv container">
+        <a href="" style="width: 100%" ng-click="CSN.hideSideNav()"><i class="fa fa-times fa-2x" style="float: right"></i></a>
+        <div class="pk-sidenav_content" ng-switch="CSN.sideNavContent">
+            <div ng-switch-when="draw" >
+                <ng-include ng-controller="SideDrawCtrl as vm" src="'views/navigation/draw.html'"></ng-include>
+            </div>
+            <div ng-switch-when="browse" >
+                <ng-include ng-controller="SideBrowseCtrl as vm" src="'views/navigation/browse.html'"></ng-include>
+            </div>
+            <div ng-switch-when="edit" >
+                <ng-include ng-controller="SideEditCtrl as vm" src="'views/navigation/edit.html'"></ng-include>
+            </div>
+        </div>
+    </div>
+</div>

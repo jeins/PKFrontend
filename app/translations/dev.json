@@ -1,0 +1,68 @@
+{
+  "app":{
+    "name": "PetaKami",
+    "language": "Language",
+    "button":{
+      "login": "Login",
+      "logout": "Logout",
+      "register": "Register",
+      "save": "Save",
+      "upload": "Upload"
+    },
+    "menu":{
+      "draw": "Draw Features",
+      "browse": "Browse Features",
+      "upload": "Upload Features",
+      "edit": "Edit Features",
+      "account": "My Account"
+    }
+  },
+  "pk_draw":{
+    "name": "Draw Feature",
+    "description": "Draw Description...",
+    "label":{
+      "workspace": "Pilih Workspace",
+      "draw": "Pilih Draw Type",
+      "layerGroupName": "Tulis Nama Layer Group"
+    }
+  },
+  "pk_browse":{
+    "name": "Browse Feature",
+    "description": "cari feature yang tersedia",
+    "label":{
+      "workspace": "Pilih Workspace"
+    }
+  },
+  "pk_upload":{
+    "name": "Upload",
+    "description": "upload description",
+    "label":{
+      "workspace": "Pilih Workspace",
+      "layerGroupName": "Layer Group Name",
+      "layer": "Upload Layer"
+    },
+    "box":{
+      "allowFormat": "Drop File SHP(.zip)",
+      "description": "File yang diizinkan untuk di upload: ZIP, CSV, JSON",
+      "point": "Point",
+      "linestring": "Line String",
+      "polygon": "Polygon",
+      "alert": "File Drag/Drop is not supported for this browser"
+    }
+  },
+  "pk_login":{
+    "name": "Login",
+    "label":{
+      "email": "Email Address",
+      "password": "Password"
+    }
+  },
+  "pk_register":{
+    "name": "Register",
+    "label":{
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "password": "Password"
+    }
+  }
+}

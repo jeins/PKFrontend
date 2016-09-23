@@ -1,0 +1,44 @@
+
+<uib-alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)">{{alert.msg}}</uib-alert>
+
+<div class="bs-callout bs-callout-info">
+    <h4>Edit Feature</h4>
+    Mari menggambar diatas peta!
+</div>
+
+<div class="form-group">
+    <label for="selectWorkspace">Pilih Workspace: </label>
+    <input type="text" id="selectWorkspace" ng-model="vm.selectedWorkspace" ng-disabled="true" style="width: 100%">
+</div>
+
+<div class="form-group">
+    <label for="selectDrawOrModify">Pilih Mode:</label>
+    <div id="selectDrawOrModify">
+        <label>
+            <input type="radio" name="drawOrModify" ng-click="vm.selectDrawOrModify('draw')" checked> Draw
+        </label>
+        <label>
+            <input type="radio" name="drawOrModify" ng-click="vm.selectDrawOrModify('modify')"> Modify
+        </label>
+    </div>
+</div>
+
+<div class="form-group" ng-show="vm.selectedWorkspace">
+    <label for="selectDrawType">Pilih Draw Type: </label>
+    <div id="selectDrawType" ng-repeat="drawType in vm.setDrawTypes">
+        <label>
+            <input type="radio" name="drawTypeRadio" ng-click="vm.selectedDrawType(drawType)" ng-disabled="vm.disabledDrawType">
+            {{drawType}}
+        </label>
+    </div>
+</div>
+
+<div class="form-group" ng-show="vm.selectedWorkspace">
+    <label for="insertLayerName">Tulis Nama Layer Group:</label>
+    <input type="text" id="insertLayerName" placeholder="Layer Group Name" ng-model="vm.layerGroupName" ng-disabled="true" style="width: 100%">
+</div>
+
+<button ng-show="vm.selectedWorkspace" type="submit"
+        ng-click="vm.updateLayer(vm.selectedWorkspace, vm.layerGroupName);vm.addAlert(vm.layerGroupName)"
+        ng-disabled="vm.isDisabled(vm.layerGroupName)"
+        class="btn btn-primary" style="width: 100%; margin-top: 20px">Save</button>

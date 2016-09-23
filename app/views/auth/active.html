@@ -1,0 +1,18 @@
+<div class="pk-content_heading">
+    <div class="pk-heading_inner">
+    </div>
+</div>
+<div class="pk-content_body">
+    <uib-alert type="{{vm.alert[1].type}}" close="vm.closeAlert(1)" ng-show="vm.alert[1].show">{{vm.alert[1].message}}</uib-alert>
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div>
+                <h1>Your account is active now!</h1>
+                <br>
+            </div>
+            <div>
+                <a ng-href="#/login" class="btn btn-primary" role="button" ng-if="!CSN.isLogedIn" translate="app.button.login" style="width: 100%;"></a>
+            </div>
+        </div>
+    </div>
+</div>

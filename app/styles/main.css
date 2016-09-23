@@ -1,0 +1,172 @@
+html, body{
+  height:100%;
+}
+.navbar-right a{
+  margin-top: 15px;
+  margin-right: 5px;
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.header{
+  position: relative;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+#pk-wrapper {
+  left: 0px;
+  top: 35px;
+  bottom: 0px;
+  right: 0;
+  position: absolute;
+}
+
+#pk-content {
+  top: 30px;
+  bottom: 0px;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.pk-mouse_position{
+  position: absolute;
+  height: 5%;
+  margin-left: 1%;
+  bottom: 0px;
+}
+
+.pk-map_canvas80{
+  /*height: 100%;*/
+  /*width: 80%;*/
+  /*float: right;*/
+  overflow: hidden;
+  position: absolute;
+  height:100%;
+  width: 100%;
+  float: right;
+  right: 0;
+  bottom: 0px;
+}
+
+.pk-map_canvas100{
+  height: 100%;
+}
+
+#pk-map{
+  height: 100%;
+}
+
+.pk-sidenav_show{
+  /*position: absolute;*/
+  /*width: 20%;*/
+  /*height: 98%;*/
+  /*float:left;*/
+  position: absolute;
+  min-width: 200px;
+  max-width: 250px;
+  height: 100%;
+  float: left;
+  background: #fff;
+  overflow: hidden;
+}
+
+.pk-sidenav_hide{
+  display: none;
+}
+
+.pk-sidenav_content{
+  margin-top: 35px;
+}
+
+.scrollDiv {
+  overflow-y: scroll;
+  display: inline-block;
+  float: none; /* Very important */
+  width: 100%;
+  height: 100%;
+ }
+
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+}
+
+.bs-callout h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+
+.bs-callout code {
+  border-radius: 3px;
+}
+
+.bs-callout+.bs-callout {
+  margin-top: -5px;
+}
+
+.bs-callout-info {
+  border-left-color: #5bc0de;
+}
+.bs-callout-info h4 {
+  color: #5bc0de;
+}
+
+.pk-content_heading {
+  background: #eee;
+  height: 7%;
+  width: 100%;
+}
+
+.pk-heading_inner {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+  padding: 1px;
+}
+
+.pk-content_body {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+  margin-top: 20px;
+  padding: 1px;
+}
+
+.drop-box {
+  background: #F8F8F8;
+  width: 90%;
+  height: 90px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 10px;
+}
+
+.pk-dropbox_brown{
+  border: 5px dashed #DDD;
+}
+
+.pk-dropbox_green{
+  border: 5px dashed green;
+}

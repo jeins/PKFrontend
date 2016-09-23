@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title translate="app.name"></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/openlayers3/build/ol.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+      <!--<link rel="stylesheet" href="styles/spinner.css">-->
+      <link rel="stylesheet" href="styles/loader.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+      <base href="/">
+  </head>
+  <body ng-app="pkfrontendApp" ng-controller="SidenavCtrl as CSN">
+
+  <div class='pk-loader' ng-cloak>
+      <div class='loader'>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--text'></div>
+      </div>
+  </div>
+
+    <div class="header" ng-cloak>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ng-href="#/" ng-click="CSN.hideSideNav()">PetaKami</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav" ng-if="CSN.isLogedIn">
+                <li ng-class="CSN.isNavActive('draw')">
+                    <a href="#/draw" ng-click="CSN.toggleSideNav('draw')" translate="app.menu.draw"></a>
+                </li>
+                <li ng-class="CSN.isNavActive('browse')">
+                    <a href="#/browse" ng-click="CSN.toggleSideNav('browse')" translate="app.menu.browse"></a>
+                </li>
+                <li ng-class="CSN.isNavActive('upload')">
+                    <a href="#/upload" ng-click="CSN.toggleSideNav('upload')" translate="app.menu.upload"></a>
+                </li>
+            </ul>
+            <div class="nav navbar-nav navbar-right btn-group">
+              <a ng-href="#/login" class="btn btn-default" role="button" ng-if="!CSN.isLogedIn" translate="app.button.login"></a>
+              <a ng-href="#/register" class="btn btn-default" role="button" ng-if="!CSN.isLogedIn" translate="app.button.register"></a>
+                <a ng-controller="AuthCtrl as ctrl" ng-click="ctrl.logout()" class="btn btn-default" role="button" ng-if="CSN.isLogedIn" translate="app.button.logout"></a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div id="pk-wrapper" ng-cloak>
+      <div id="pk-content" ng-view="">
+      </div>
+    </div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/openlayers3/build/ol.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/satellizer/satellizer.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/constant.js"></script>
+        <script src="scripts/config.js"></script>
+        <script src="scripts/routes.js"></script>
+
+        <script src="scripts/map/directives/_pkMaps.js"></script>
+        <script src="scripts/map/directives/olCenter.js"></script>
+        <script src="scripts/map/directives/olLayer.js"></script>
+        <script src="scripts/map/directives/olPath.js"></script>
+        <script src="scripts/map/directives/olView.js"></script>
+        <script src="scripts/map/directives/olControl.js"></script>
+        <script src="scripts/map/directives/olMarker.js"></script>
+        <script src="scripts/feature/directive/stSelectMultiple.js"></script>
+
+        <script src="scripts/auth/services/svcSession.js"></script>
+        <script src="scripts/map/services/olData.js"></script>
+        <script src="scripts/map/services/olMapDefaults.js"></script>
+        <script src="scripts/map/services/olHelpers.js"></script>
+        <script src="scripts/api/services/svcAuth.js"></script>
+        <script src="scripts/api/services/svcSecurity.js"></script>
+        <script src="scripts/api/services/svcWorkspace.js"></script>
+        <script src="scripts/api/services/svcLayer.js"></script>
+        <script src="scripts/api/services/svcSharedProperties.js"></script>
+        <script src="scripts/api/services/svcPkLayer.js"></script>
+
+        <script src="scripts/auth/controllers/AuthCtrl.js"></script>
+        <script src="scripts/navigation/controllers/SidenavCtrl.js"></script>
+        <script src="scripts/navigation/controllers/SideDrawCtrl.js"></script>
+        <script src="scripts/navigation/controllers/SideBrowseCtrl.js"></script>
+        <script src="scripts/navigation/controllers/SideEditCtrl.js"></script>
+        <script src="scripts/map/controllers/MapCtrl.js"></script>
+        <script src="scripts/map/controllers/ViewLayerCtrl.js"></script>
+        <script src="scripts/map/controllers/EditLayerCtrl.js"></script>
+        <script src="scripts/feature/controllers/UploadCtrl.js"></script>
+        <script src="scripts/feature/controllers/BrowseCtrl.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

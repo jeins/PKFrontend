@@ -1,0 +1,71 @@
+<div class="pk-content_heading">
+    <div class="pk-heading_inner">
+        <h1 style="font-size: 22px" translate="pk_upload.name"></h1>
+    </div>
+</div>
+<div class="pk-content_body">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="inputLayerName" translate="pk_upload.label.layerGroupName"></label>
+                <input type="text" ng-model="vm.layerGroupName" id="inputLayerName" placeholder="Tuliskan Nama Layer Group" style="width: 100%">
+            </div>
+            <div class="form-group">
+                <label for="selectWorkspace" translate="pk_upload.label.workspace"></label>
+                <select id="selectWorkspace" ng-model="vm.selectedWorkspace"
+                        ng-options="workspace as workspace for workspace in vm.workspaces"
+                        style="width: 100%" ng-change="vm.changeWorkspace(vm.selectedWorkspace)">
+                </select>
+            </div>
+            <div class="form-group" uib-collapse="vm.isCollapsed">
+                <label for="uploadLayer" translate="pk_upload.label.layer"></label>
+                <div class="row" id="uploadLayer">
+                    <div class="col-sm-6 col-md-4" ng-if="vm.showPoint">
+                        <div class="thumbnail">
+                            <div ngf-select="vm.uploadLayerGroup($file, 'point')"
+                                 ngf-drop="vm.uploadLayerGroup($file, 'point')" class="drop-box" ng-class="vm.isPointSelected"
+                                 ngf-drag-over-class="'dragover'" ngf-multiple="false" translate="pk_upload.box.allowFormat">
+                            </div>
+                            <div ngf-no-file-drop translate="pk_upload.box.alert"></div>
+                            <div class="caption" style="text-align: center">
+                                <h5 translate="pk_upload.box.point"></h5>
+                                <p translate="pk_upload.box.description"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4" ng-if="vm.showLineString">
+                        <div class="thumbnail">
+                            <div ngf-select="vm.uploadLayerGroup($file, 'linestring')"
+                                 ngf-drop="vm.uploadLayerGroup($file, 'linestring')" class="drop-box" ng-class="vm.isLineSelected"
+                                 ngf-drag-over-class="'dragover'" ngf-multiple="false" translate="pk_upload.box.allowFormat">
+                            </div>
+                            <div ngf-no-file-drop translate="pk_upload.box.alert"></div>
+                            <div class="caption" style="text-align: center">
+                                <h5 translate="pk_upload.box.linestring"></h5>
+                                <p translate="pk_upload.box.description"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4" ng-if="vm.showPolygon">
+                        <div class="thumbnail">
+                            <div ngf-select="vm.uploadLayerGroup($file, 'polygon')"
+                                 ngf-drop="vm.uploadLayerGroup($file, 'polygon')" class="drop-box" ng-class="vm.isPolySelected"
+                                 ngf-drag-over-class="'dragover'" ngf-multiple="false" translate="pk_upload.box.allowFormat">
+                            </div>
+                            <div ngf-no-file-drop translate="pk_upload.box.alert"></div>
+                            <div class="caption" style="text-align: center">
+                                <h5 translate="pk_upload.box.polygon"></h5>
+                                <p translate="pk_upload.box.description"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary" ng-click="vm.uploadToGeoServer()" style="width: 100%;" ng-disabled="vm.loading">
+                    <i ng-if="vm.loading" class='fa fa-circle-o-notch fa-spin'></i> <span translate="app.button.upload"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
