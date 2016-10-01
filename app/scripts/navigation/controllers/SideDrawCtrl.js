@@ -112,7 +112,7 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
         var obj = {
             "name": layerGroupName,
             "workspace": workspace,
-            "type": tmpType
+            "coordinates": tmpType
         };
 
         svcPkLayer.addUserLayer({name: layerGroupName, description: "abc test",workspace: workspace}, function(response){
