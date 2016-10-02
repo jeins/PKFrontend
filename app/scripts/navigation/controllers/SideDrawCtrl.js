@@ -14,9 +14,14 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
     vm.isDisabled = isDisabled;
     vm.selectedDrawType = selectedDrawType;
 
-    init();
+    _init();
 
-    function init(){
+    /**
+     * main
+     *
+     * @private
+     */
+    function _init(){
         var point = [], line=[], poly=[];
         vm.loading = false;
         vm.setDrawTypes = [];
@@ -59,12 +64,23 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
         });
     }
 
+    /**
+     * event select draw type
+     *
+     * @param value
+     */
     function selectedDrawType(value){
         svcSharedProperties.sendBroadcast(function(v){
             $scope.$emit('pk.draw.selectedDrawType', value);
         });
     }
 
+    /**
+     * check if require information already insert to enable save button
+     *
+     * @param text
+     * @returns {boolean}
+     */
     function isDisabled(text){
         if(text == "" || svcSharedProperties.getLayerValues() == undefined){
             return true;
@@ -72,14 +88,29 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
         return false;
     }
 
+    /**
+     * event push alert
+     *
+     * @param layerGroupName
+     */
     function addAlert(layerGroupName){
         vm.alerts.push({type: 'success', msg: 'Layer '+layerGroupName+' telah dibuat!'});
     }
 
+    /**
+     * event close box laert
+     *
+     * @param index
+     */
     function closeAlert(index){
         vm.alerts.splice(index, 1);
     }
 
+    /**
+     * event change workspace
+     *
+     * @param workspace
+     */
     function changeWorkspace(workspace){
         $log.info("selected workspace: %s", workspace);
         svcWorkspace.getWorkspaceWithDrawTyp(workspace, function(result){
@@ -87,6 +118,12 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
         });
     }
 
+    /**
+     * save layer to geoserver
+     *
+     * @param workspace
+     * @param layerGroupName
+     */
     function saveLayer(workspace, layerGroupName){
         vm.loading = true;
         var tmpVal = svcSharedProperties.getLayerValues();

@@ -24,6 +24,11 @@ function ViewLayerCtrl($scope, $routeParams, svcSharedProperties, svcLayer, olDa
         _setupMapZoom(request.workspace, request.layerGroup);
     }
 
+    /**
+     * @param workspace
+     * @param layerGroup
+     * @private
+     */
     function _setupMapZoom(workspace, layerGroup){
         svcLayer.getBbox(workspace, layerGroup, function(response){
             var records = response.data;
@@ -39,6 +44,10 @@ function ViewLayerCtrl($scope, $routeParams, svcSharedProperties, svcLayer, olDa
         });
     }
 
+    /**
+     *
+     * @private
+     */
     function _setupMap(){
         angular.extend($scope, {
             defaults: {
@@ -57,6 +66,12 @@ function ViewLayerCtrl($scope, $routeParams, svcSharedProperties, svcLayer, olDa
         });
     }
 
+    /**
+     *
+     * @param params
+     * @returns {{}}
+     * @private
+     */
     function _getRequestProperties(params){
         var request = {};
         request.workspace = params.split(':')[0];
