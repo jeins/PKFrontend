@@ -121,12 +121,14 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
 
         svcLayer.addLayer(obj, function(response){
             layerGroupName = layerGroupName.replace(/ /g, '_');
-            var data = response.data;
+            var data = response;
             var setType = '';
 
             for(var i=0; i<data.length; i++){
                 setType += data[i].layer + '?' + data[i].drawType +';';
             }
+
+            $log.info("Add GeoServerLayer: LayerGroupName= %s & Workspace= %s & Type= %s", layerGroupName, workspace, setType);
 
             $window.location.href = '/#/view/' + svcSecurity.encode(workspace+':'+layerGroupName+':'+setType);
             $window.location.reload();

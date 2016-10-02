@@ -12,7 +12,7 @@ function svcSharedProperties($timeout, $q, $http){
     function tester(){
         var deferred = $q.defer();
         $http
-            .get('http://128.199.125.35/api/users')
+            .get('http://94.177.245.142/api/users')
             .then(function(result){
                 deferred.resolve(result);
             })
