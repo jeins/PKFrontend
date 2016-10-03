@@ -47,7 +47,7 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
         var currentPage = pagination.start || 1;
         var limit = pagination.number || 5;
         var sortBy = 'id'; //TODO:: first add static sort by id
-        svcPkLayer.getLayers(sortBy, limit, currentPage, function(response){console.log(response)
+        svcPkLayer.getLayers(sortBy, limit, currentPage, function(response){
             vm.dataTables = response.items;
             tableState.pagination.numberOfPages = response.total_page;
             vm.isLoading = false;
