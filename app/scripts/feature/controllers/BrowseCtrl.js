@@ -35,10 +35,13 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
 
         var currentPage = pagination.start || 1;
         var limit = pagination.number || 5;
-        svcPkLayer.getLayers(limit, currentPage, function(response){
-            vm.dataTables = response.items;
+        var sortBy = 'id'; //TODO:: first add static sort by id
+        svcPkLayer.getLayers(sortBy, limit, currentPage, function(response){
+            vm.dataTables = response;
             tableState.pagination.numberOfPages = response.total_pages;
             vm.isLoading = false;
+
+            $log.info(response);
         })
     }
 
@@ -46,7 +49,7 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
         layer = layer.replace(/[ ]+/g, '_');
         vm.setType = '';
         svcLayer.getLayerAndDrawType(workspace, layer, function(response){
-            var records = response.data;
+            var records = response;
             for(var i=0; i<records.length; i++){
                 vm.setType += records[i].layer + '?' + records[i].drawType +';';
             }
@@ -59,7 +62,7 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
         layer = layer.replace(/[ ]+/g, '_');
         vm.setType = '';
         svcLayer.getLayerAndDrawType(workspace, layer, function(response){
-            var records = response.data;
+            var records = response;
             for(var i=0; i<records.length; i++){
                 vm.setType += records[i].layer + '?' + records[i].drawType +';';
             }
