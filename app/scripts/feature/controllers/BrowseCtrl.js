@@ -18,6 +18,12 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
         vm.isLoading = false;
     }
 
+    /**
+     * download layer
+     *
+     * @param layer
+     * @param workspace
+     */
     function downloadLayer(layer, workspace){
         svcLayer.getFeatureCollectionGeoJson(workspace, layer, function(response){
             var blob = new Blob([angular.toJson(response)], { type:"application/json;charset=utf-8;" });
@@ -28,6 +34,11 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
         });
     }
 
+    /**
+     * get user layers
+     *
+     * @param tableState
+     */
     function getData(tableState){
         vm.isLoading = true;
 
@@ -36,15 +47,21 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
         var currentPage = pagination.start || 1;
         var limit = pagination.number || 5;
         var sortBy = 'id'; //TODO:: first add static sort by id
-        svcPkLayer.getLayers(sortBy, limit, currentPage, function(response){
-            vm.dataTables = response;
-            tableState.pagination.numberOfPages = response.total_pages;
+        svcPkLayer.getLayers(sortBy, limit, currentPage, function(response){console.log(response)
+            vm.dataTables = response.items;
+            tableState.pagination.numberOfPages = response.total_page;
             vm.isLoading = false;
 
             $log.info(response);
         })
     }
 
+    /**
+     * view selected layer
+     *
+     * @param layer
+     * @param workspace
+     */
     function viewLayer(layer, workspace){
         layer = layer.replace(/[ ]+/g, '_');
         vm.setType = '';
@@ -58,6 +75,12 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
         });
     }
 
+    /**
+     * edit selected layer
+     *
+     * @param layer
+     * @param workspace
+     */
     function editLayer(layer, workspace){
         layer = layer.replace(/[ ]+/g, '_');
         vm.setType = '';
