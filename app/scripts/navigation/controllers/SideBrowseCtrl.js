@@ -3,9 +3,9 @@
 angular.module('pkfrontendApp')
     .controller('SideBrowseCtrl', SideBrowseCtrl);
 
-SideBrowseCtrl.$inject = ['$scope', 'svcLayer', 'svcWorkspace', '$window', '$routeParams', '$log', 'svcSecurity', 'svcPkLayer', 'CONFIG'];
+SideBrowseCtrl.$inject = ['svcLayer', 'svcWorkspace', '$window', '$routeParams', '$log', 'svcSecurity', 'svcPkLayer', 'CONFIG'];
 
-function SideBrowseCtrl($scope, svcLayer, svcWorkspace, $window, $routeParams, $log, svcSecurity, svcPkLayer, CONFIG) {
+function SideBrowseCtrl(svcLayer, svcWorkspace, $window, $routeParams, $log, svcSecurity, svcPkLayer, CONFIG) {
     var vm = this;
     vm.init = init;
     vm.changeWorkspace = changeWorkspace;
@@ -61,6 +61,9 @@ function SideBrowseCtrl($scope, svcLayer, svcWorkspace, $window, $routeParams, $
         }
     }
 
+    /**
+     * event download layercollection (geo)json
+     */
     function downloadFeatureCollection(){
         var layerNames = "";
         vm.layers.forEach(function(values){
@@ -71,9 +74,15 @@ function SideBrowseCtrl($scope, svcLayer, svcWorkspace, $window, $routeParams, $
         $window.location.href = CONFIG.http.rest_host + '/layer/' + vm.selectedWorkspace + '/' + layerNames + '/bylayer/geojson';
     }
 
+    /**
+     * event download layer by specific type
+     *
+     * @param layer
+     * @param type
+     */
     function downloadLayer(layer, type){
         svcLayer.geoserver(function(response){
-            var url = response.data + vm.selectedWorkspace +
+            var url = response + vm.selectedWorkspace +
                 '/ows?service=WFS&version=1.0.0&request=GetFeature&typeName='+ vm.selectedWorkspace + ':' + layer +
                 '&maxFeatures=50&outputFormat=';
 
@@ -91,15 +100,19 @@ function SideBrowseCtrl($scope, svcLayer, svcWorkspace, $window, $routeParams, $
                     url += 'application%2Fvnd.google-earth.kml%2Bxml';
                     break;
             }
+            console.log(url);
             $window.location.href = url;
         });
     }
 
+    /**
+     * event change layer type
+     */
     function layerSelectChange(){
         var layer = vm.layerGroupName.replace(/[ ]+/g, '_');
         vm.setType = '';
         svcLayer.getLayerAndDrawType(vm.selectedWorkspace, layer, function(response){
-            var records = response.data;
+            var records = response;
             for(var i=0; i<records.length; i++){
                 if(vm.selectedLayer['point'] && records[i].drawType == 'point'){
                     vm.setType += records[i].layer;
@@ -117,6 +130,12 @@ function SideBrowseCtrl($scope, svcLayer, svcWorkspace, $window, $routeParams, $
         });
     }
 
+    /**
+     * view layer
+     *
+     * @param workspace
+     * @param layer
+     */
     function viewLayer(workspace, layer){
         layer = layer.replace(/[ ]+/g, '_');
         vm.setType = '';
@@ -130,6 +149,11 @@ function SideBrowseCtrl($scope, svcLayer, svcWorkspace, $window, $routeParams, $
         });
     }
 
+    /**
+     * event change workspace
+     *
+     * @param workspace
+     */
     function changeWorkspace(workspace){
         vm.displayLayer = false;
         vm.layerGroups = [];
