@@ -37,27 +37,47 @@ function SideEditCtrl($scope, svcWorkspace, svcSharedProperties, $log, svcLayer)
             for(var i=0; i<layer.length; i++){
                 if(layer[i] != ""){
                     svcLayer.getDrawType(vm.selectedWorkspace, vm.layerGroupName, layer[i], function(response){
-                        vm.layerWithDrawType.push(response.data);
+                        vm.layerWithDrawType.push(response);
                     })
                 }
             }
         });
     }
 
+    /**
+     * event add alert
+     *
+     * @param layerGroupName
+     */
     function addAlert(layerGroupName){
         vm.alerts.push({type: 'success', msg: 'Layer '+layerGroupName+' telah simpan!'});
     }
 
+    /**
+     * event close alert
+     *
+     * @param index
+     */
     function closeAlert(index){
         vm.alerts.splice(index, 1);
     }
 
+    /**
+     * event selected draw type
+     *
+     * @param value
+     */
     function selectedDrawType(value){
         svcSharedProperties.sendBroadcast(function(v){
             $scope.$emit('pk.edit.selectedDrawType', value);
         });
     }
 
+    /**
+     * event which mode(draw / modify) is selected
+     *
+     * @param value
+     */
     function selectDrawOrModify(value){
         $log.info("Selected mode: " + value);
 
@@ -70,6 +90,12 @@ function SideEditCtrl($scope, svcWorkspace, svcSharedProperties, $log, svcLayer)
         });
     }
 
+    /**
+     * update layer
+     *
+     * @param workspace
+     * @param layerGroupName
+     */
     function updateLayer(workspace, layerGroupName){
         var coordinates = _generateCoordinates();
 
@@ -85,6 +111,12 @@ function SideEditCtrl($scope, svcWorkspace, svcSharedProperties, $log, svcLayer)
         });
     }
 
+    /**
+     *
+     * @param drawType
+     * @returns {boolean}
+     * @private
+     */
     function _checkIfCreateNewDrawType(drawType){
         var isExist = false;
         vm.layerWithDrawType.forEach(function(d){
@@ -95,6 +127,11 @@ function SideEditCtrl($scope, svcWorkspace, svcSharedProperties, $log, svcLayer)
         return isExist;
     }
 
+    /**
+     *
+     * @returns {{linestring: string, point: string, polygon: string}}
+     * @private
+     */
     function _generateCoordinates(){
         var tmpVal = svcSharedProperties.getLayerValues();
         var tmpType = {'linestring': '', 'point': '', 'polygon':''};
@@ -139,6 +176,14 @@ function SideEditCtrl($scope, svcWorkspace, svcSharedProperties, $log, svcLayer)
         return tmpType;
     }
 
+    /**
+     *
+     * @param field
+     * @param reverse
+     * @param primer
+     * @returns {Function}
+     * @private
+     */
     function _sortBy(field, reverse, primer){
 
         var key = primer ?
