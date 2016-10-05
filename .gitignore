@@ -2,6 +2,7 @@
 
 node_modules/
 dist/
+pkfrontend_html/
 .tmp/
 .sass-cache/
 bower_components/
