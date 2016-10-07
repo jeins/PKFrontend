@@ -12,7 +12,7 @@ function MapCtrl($scope, $log, svcSharedProperties) {
 
     function init(){
         svcSharedProperties.tester(function(res){
-            console.log(res)
+            $log.info(res)
         });
 
         vm.drawType = '';
