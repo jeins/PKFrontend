@@ -22,6 +22,7 @@ function AuthCtrl($auth, $log, $window, svcAuth, $routeParams){
 		vm.data.full_name = "demo user";
 		vm.activation = false;
 		vm.disabledForm = false;
+		vm.btnDisabled = false;
 
         vm.alert = [
             {type: "danger", message: "Email Already Exist!", show: false},
@@ -69,16 +70,18 @@ function AuthCtrl($auth, $log, $window, svcAuth, $routeParams){
 
 	function register(){
 		vm.loading = true;
+		vm.btnDisabled = true;
 		svcAuth.register(vm.data, function(response){
 			$log.info(response);
-			if(response.data.error){
+			if(response.error){
 				vm.loading = false;
 				vm.alert[0].show = true;
-				$log.error(response.data.error.message);
+				$log.error(response.error);
 			} else{
+				vm.loading = false;
 				vm.disabledForm = true;
 				vm.alert[2].show = true;
-				$log.info(response);
+				$log.info(response.success);
 			}
 		});
 	}
