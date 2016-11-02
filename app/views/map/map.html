@@ -1,5 +1,19 @@
-<pk-maps id="pk-map" ol-properties="geoproperties" ng-class="CSN.mapClass" ol-draw-type="'{{vm.drawType}}'" ol-layer-mode="'{{vm.isDrawOrModify}}'" ol-center="indonesia" ol-defaults="defaults">
+<pk-maps id="pk-map" ol-properties="geoproperties" ng-class="CSN.mapClass"
+         ol-draw-type="'{{vm.drawType}}'" ol-layer-mode="'{{vm.isDrawOrModify}}'"
+         custom-layers="true"
+         ol-center="indonesia" ol-defaults="defaults">
+    <ol-layer ng-if="vm.layerModel == 'arcgis_indonesia'" ol-layer-properties="indomap"></ol-layer>
 </pk-maps>
+
+<div class="pk-map-controller">
+    <h5>Map Layer:</h5>
+    <div class="radio">
+        <label><input type="radio" ng-model="vm.layerModel" value="openstreetmap">OpenStreetMap</label>
+    </div>
+    <div class="radio">
+        <label><input type="radio" ng-model="vm.layerModel" value="arcgis_indonesia">Arcgis Indonesia</label>
+    </div>
+</div>
 
 <!--<div class="pk-mouse_position" ng-class="CSN.mapClass">-->
     <!--<p ng-bind="CMP.mouseposition"></p>-->

@@ -17,6 +17,7 @@ function MapCtrl($scope, $log, svcSharedProperties) {
 
         vm.drawType = '';
         vm.drawValue = [];
+        vm.layerModel = 'openstreetmap';
         var point = [], line=[], poly=[];
 
         angular.extend($scope, {
@@ -29,6 +30,12 @@ function MapCtrl($scope, $log, svcSharedProperties) {
                 lat: -0.4055727193536711,
                 lon: 116.19846321160155,
                 zoom: 5
+            },
+            indomap: {
+                source:{
+                    type: 'TileArcGISRest',
+                    url: 'http://portal.ina-sdi.or.id/arcgis/rest/services/IGD/RupabumiIndonesia/MapServer/'
+                }
             },
             mouseposition: '',
             projection: 'EPSG:4326'

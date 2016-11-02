@@ -320,6 +320,17 @@ function olHelpers($q, $http, $log) {
                 oSource = new ol.source.BingMaps(bingConfiguration);
                 break;
 
+            case 'TileArcGISRest':
+                if(!source.url){
+                    $log.error('[AngularJS - Openlayers] - TileArcGISRest Layer needs valid url');
+                    return;
+                }
+
+                oSource = new ol.source.TileArcGISRest({
+                    attributions: createAttribution(source),
+                    url: source.url
+                });
+                break;
             case 'MapQuest':
                 if (!source.layer || mapQuestLayers.indexOf(source.layer) === -1) {
                     $log.warn('[AngularJS - Openlayers] - MapQuest layers needs a valid \'layer\' property.');

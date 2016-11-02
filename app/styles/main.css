@@ -170,3 +170,12 @@ html, body{
 .pk-dropbox_green{
   border: 5px dashed green;
 }
+
+.pk-map-controller{
+  border-radius: 10px;
+  background-color: #fff;
+  position: absolute;
+  top: 30px;
+  right: 100px;
+  padding: 15px;
+}
