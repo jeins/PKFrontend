@@ -25,6 +25,7 @@ function BrowseCtrl($scope, $log, svcPkLayer, svcSecurity, $window, svcLayer, $f
      * @param workspace
      */
     function downloadLayer(layer, workspace){
+        layer = layer.replace(/ /g, '_');
         svcLayer.getFeatureCollectionGeoJson(workspace, layer, function(response){
             var blob = new Blob([angular.toJson(response)], { type:"application/json;charset=utf-8;" });
             var downloadLink = angular.element('<a></a>');

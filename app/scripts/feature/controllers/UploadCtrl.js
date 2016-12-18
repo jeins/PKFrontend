@@ -90,7 +90,7 @@ function UploadCtrl($scope, Upload, svcWorkspace, svcLayer, CONFIG, $timeout,$wi
 
         svcLayer.uploadFileToGeoServer(vm.selectedWorkspace, vm.layerGroupName, vm.timeNow, function(response){
             var layerGroupName = vm.layerGroupName.replace(/ /g, '_');
-            var data = response.data;
+            var data = response;
             var setType = '';
 
             for(var i=0; i<data.length; i++){
