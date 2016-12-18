@@ -34,40 +34,39 @@
       </div>
   </div>
 
-    <div class="header" ng-cloak>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+
+          <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" ng-href="#/" ng-click="CSN.hideSideNav()">PetaKami</a>
-          </div>
+          </button>
+          <a class="navbar-brand" ng-href="#/" ng-click="CSN.hideSideNav()">PetaKami</a>
+      </div>
 
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav" ng-if="CSN.isLogedIn">
-                <li ng-class="CSN.isNavActive('draw')">
-                    <a href="#/draw" ng-click="CSN.toggleSideNav('draw')" translate="app.menu.draw"></a>
-                </li>
-                <li ng-class="CSN.isNavActive('browse')">
-                    <a href="#/browse" ng-click="CSN.toggleSideNav('browse')" translate="app.menu.browse"></a>
-                </li>
-                <li ng-class="CSN.isNavActive('upload')">
-                    <a href="#/upload" ng-click="CSN.toggleSideNav('upload')" translate="app.menu.upload"></a>
-                </li>
-            </ul>
-            <div class="nav navbar-nav navbar-right btn-group">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+          <ul class="nav navbar-nav" ng-if="CSN.isLogedIn">
+              <li ng-class="CSN.isNavActive('draw')">
+                  <a href="#/draw" ng-click="CSN.toggleSideNav('draw')" translate="app.menu.draw"></a>
+              </li>
+              <li ng-class="CSN.isNavActive('browse')">
+                  <a href="#/browse" ng-click="CSN.toggleSideNav('browse')" translate="app.menu.browse"></a>
+              </li>
+              <li ng-class="CSN.isNavActive('upload')">
+                  <a href="#/upload" ng-click="CSN.toggleSideNav('upload')" translate="app.menu.upload"></a>
+              </li>
+          </ul>
+          <div class="nav navbar-nav navbar-right btn-group" style="margin-right: 15px">
               <a ng-href="#/login" class="btn btn-default" role="button" ng-if="!CSN.isLogedIn" translate="app.button.login"></a>
               <a ng-href="#/register" class="btn btn-default" role="button" ng-if="!CSN.isLogedIn" translate="app.button.register"></a>
-                <a ng-controller="AuthCtrl as ctrl" ng-click="ctrl.logout()" class="btn btn-default" role="button" ng-if="CSN.isLogedIn" translate="app.button.logout"></a>
-            </div>
+              <a ng-controller="AuthCtrl as ctrl" ng-click="ctrl.logout()" class="btn btn-default" role="button" ng-if="CSN.isLogedIn" translate="app.button.logout"></a>
           </div>
-        </div>
-      </nav>
-    </div>
+      </div><!-- /.navbar-collapse -->
+  </nav>
 
     <div id="pk-wrapper" ng-cloak>
       <div id="pk-content" ng-view="">
