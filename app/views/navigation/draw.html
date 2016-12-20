@@ -31,7 +31,12 @@
     <input type="text" id="insertLayerName" placeholder="Layer Group Name" ng-model="vm.layerGroupName" ng-disabled="vm.disabledTextLayer" style="width: 100%">
 </div>
 
+<div class="form-group" ng-show="vm.selectedWorkspace">
+    <label for="insertLayerDescription">Layer Description</label>
+    <textarea class="form-control" rows="3" id="insertLayerDescription" style="width: 100%" ng-model="vm.description" ng-disabled="vm.disabledTextLayer"></textarea>
+</div>
+
 <button ng-show="vm.selectedWorkspace" type="submit"
-        ng-click="vm.saveLayer(vm.selectedWorkspace, vm.layerGroupName);vm.addAlert(vm.layerGroupName)"
+        ng-click="vm.saveLayer(vm.selectedWorkspace);vm.addAlert(vm.layerGroupName)"
         ng-disabled="vm.loading; vm.isDisabled(vm.layerGroupName)"
         class="btn btn-primary" style="width: 100%; margin-top: 20px"><i ng-if="vm.loading" class='fa fa-circle-o-notch fa-spin'></i> <span translate="app.button.save"></span></button>

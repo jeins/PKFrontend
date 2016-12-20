@@ -19,6 +19,7 @@ function UploadCtrl($scope, Upload, svcWorkspace, svcLayer, CONFIG, $timeout,$wi
         vm.workspaces = '';
         vm.selectedWorkspace = '';
         vm.layerGroupName = '';
+        vm.description = '';
         vm.showPoint = false; vm.showLineString = false; vm.showPolygon = false;
         vm.isCollapsed = true;
         vm.isPointSelected = 'pk-dropbox_brown'; vm.isLineSelected = 'pk-dropbox_brown'; vm.isPolySelected = 'pk-dropbox_brown';
@@ -84,7 +85,7 @@ function UploadCtrl($scope, Upload, svcWorkspace, svcLayer, CONFIG, $timeout,$wi
     function uploadToGeoServer(){
         vm.loading = true;
 
-        svcPkLayer.addUserLayer({name: vm.layerGroupName, description: "abc test",workspace: vm.selectedWorkspace}, function(response){
+        svcPkLayer.addUserLayer({name: vm.layerGroupName, description: vm.description, workspace: vm.selectedWorkspace}, function(response){
             $log.info("Add UserLayer: LayerName= %s & Workspace= %s ", vm.layerGroupName, vm.selectedWorkspace)
         });
 

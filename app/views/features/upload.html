@@ -11,6 +11,10 @@
                 <input type="text" ng-model="vm.layerGroupName" id="inputLayerName" placeholder="Tuliskan Nama Layer Group" style="width: 100%">
             </div>
             <div class="form-group">
+                <label for="insertLayerDescription">Layer Description</label>
+                <textarea class="form-control" rows="3" id="insertLayerDescription" style="width: 100%" ng-model="vm.description"></textarea>
+            </div>
+            <div class="form-group">
                 <label for="selectWorkspace" translate="pk_upload.label.workspace"></label>
                 <select id="selectWorkspace" ng-model="vm.selectedWorkspace"
                         ng-options="workspace as workspace for workspace in vm.workspaces"

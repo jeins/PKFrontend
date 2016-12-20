@@ -27,6 +27,7 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
         vm.setDrawTypes = [];
         vm.setWorkspaces = [];
         vm.layerGroupName = '';
+        vm.description = '';
         vm.alerts = [];
 
         svcWorkspace.getWorkspaces(function(result){
@@ -122,9 +123,8 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
      * save layer to geoserver
      *
      * @param workspace
-     * @param layerGroupName
      */
-    function saveLayer(workspace, layerGroupName){
+    function saveLayer(workspace){
         vm.loading = true;
         var tmpVal = svcSharedProperties.getLayerValues();
         $log.info(tmpVal);
@@ -147,17 +147,17 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
         }
 
         var obj = {
-            "name": layerGroupName,
+            "name": vm.layerGroupName,
             "workspace": workspace,
             "coordinates": tmpType
         };
 
-        svcPkLayer.addUserLayer({name: layerGroupName, description: "abc test",workspace: workspace}, function(response){
-            $log.info("Add UserLayer: LayerName= %s & Workspace= %s ", layerGroupName, workspace)
+        svcPkLayer.addUserLayer({name: vm.layerGroupName, description: vm.description, workspace: workspace}, function(response){
+            $log.info("Add UserLayer: LayerName= %s & Workspace= %s ", vm.layerGroupName, workspace)
         });
 
         svcLayer.addLayer(obj, function(response){
-            layerGroupName = layerGroupName.replace(/ /g, '_');
+            vm.layerGroupName = vm.layerGroupName.replace(/ /g, '_');
             var data = response;
             var setType = '';
 
@@ -165,9 +165,9 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
                 setType += data[i].layer + '?' + data[i].drawType +';';
             }
 
-            $log.info("Add GeoServerLayer: LayerGroupName= %s & Workspace= %s & Type= %s", layerGroupName, workspace, setType);
+            $log.info("Add GeoServerLayer: LayerGroupName= %s & Workspace= %s & Type= %s", vm.layerGroupName, workspace, setType);
 
-            $window.location.href = '/#/view/' + svcSecurity.encode(workspace+':'+layerGroupName+':'+setType);
+            $window.location.href = '/#/view/' + svcSecurity.encode(workspace+':'+vm.layerGroupName+':'+setType);
             $window.location.reload();
         });
     }
