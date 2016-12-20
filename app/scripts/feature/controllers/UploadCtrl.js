@@ -75,7 +75,7 @@ function UploadCtrl($scope, Upload, svcWorkspace, svcLayer, CONFIG, $timeout,$wi
 
     function _isMimeTypeAllow(name){
         var res = name.toLowerCase().split('.');
-        if(res[res.length-1] == 'zip'){// || res[res.length-1] == 'csv' || res[res.length-1] == 'json'){
+        if(res[res.length-1] == 'zip' || res[res.length-1] == 'csv' || res[res.length-1] == 'json'){
             return true;
         }
         return false;
