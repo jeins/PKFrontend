@@ -20,6 +20,8 @@ function SideEditCtrl($scope, svcWorkspace, svcSharedProperties, $log, svcLayer)
         vm.layerGroupName = '';
         vm.alerts = [];
         vm.disabledDrawType = false;
+        vm.isNlpSelected = false;
+        vm.selectedNlpScale = '10k';
 
         $scope.$on('pk.edit.layerGroup', function(event, data){
             vm.disabledTextLayer = true;
@@ -68,8 +70,10 @@ function SideEditCtrl($scope, svcWorkspace, svcSharedProperties, $log, svcLayer)
      * @param value
      */
     function selectedDrawType(value){
+        if(value === 'nlp') vm.isNlpSelected = true;
+        else vm.isNlpSelected = false;
         svcSharedProperties.sendBroadcast(function(v){
-            $scope.$emit('pk.edit.selectedDrawType', value);
+            $scope.$emit('pk.edit.selectedDrawType', {drawType: value, scale: vm.selectedNlpScale});
         });
     }
 

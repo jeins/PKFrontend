@@ -17,6 +17,7 @@ function MapCtrl($scope, $log, svcSharedProperties) {
 
         vm.drawType = '';
         vm.drawValue = [];
+        vm.mapScale = '';
         vm.layerModel = 'openstreetmap';
         var point = [], line=[], poly=[];
 
@@ -43,7 +44,8 @@ function MapCtrl($scope, $log, svcSharedProperties) {
 
         $scope.$on('pk.draw.selectedDrawType', function(event, data){
             $log.info("selected drawType: %s", data);
-            vm.drawType = data;
+            vm.drawType = data.drawType;
+            vm.mapScale = data.scale;
         });
 
         $scope.$on('pk.draw.feature', function(event, data) {

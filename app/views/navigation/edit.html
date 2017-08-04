@@ -31,7 +31,24 @@
             {{drawType}}
         </label>
     </div>
+    <div>
+        <label>
+            <input type="radio" name="drawTypeRadio" ng-click="vm.selectedDrawType('nlp')">
+            NLP
+        </label>
+    </div>
 </div>
+
+<div class="form-group" ng-show="vm.selectedWorkspace && vm.isNlpSelected">
+    <label for="selectgNlpScale">Map Scale</label>
+    <select id="selectgNlpScale" style="width: 100%" ng-model="vm.selectedNlpScale">
+        <option value="250k">1:250.000</option>
+        <option value="50k">1:50.000</option>
+        <option value="25k">1:25.000</option>
+        <option value="10k">1:10.000</option>
+    </select>
+</div>
+
 
 <div class="form-group" ng-show="vm.selectedWorkspace">
     <label for="insertLayerName">Tulis Nama Layer Group:</label>

@@ -12,6 +12,7 @@ function EditLayerCtrl($scope, $routeParams, svcSharedProperties, svcLayer, olDa
 
     function init(){
         vm.drawType = '';
+        vm.mapScale = '';
         vm.drawValue = [];
         vm.isDrawOrModify = 'draw';
         vm.geoproperties = '';
@@ -32,7 +33,8 @@ function EditLayerCtrl($scope, $routeParams, svcSharedProperties, svcLayer, olDa
         });
 
         $scope.$on('pk.edit.selectedDrawType', function(event, data){
-            vm.drawType = data;
+            vm.drawType = data.drawType;
+            vm.mapScale = data.scale;
         });
 
         $scope.$on('pk.edit.isDrawOrModify', function(event, data){

@@ -141,6 +141,25 @@ angular.module('pkfrontendApp')
                     });
             }
 
+
+            function getNLP(coordinates, scale, doneCallback){
+                var serviceUrl = 'http://www.hariep.com/nlp/index.php?';
+                var request = {
+                    op: "ll2nlp",
+                    lat: coordinates[1],
+                    lon: coordinates[0],
+                    skala: scale,
+                    format: "geojson"
+                };
+                Object.keys(request).forEach(function(key) {
+                    serviceUrl += key + '=' + request[key] + '&';
+                });
+                $http({url : serviceUrl,method: 'GET'})
+                    .then(function(response){
+                        doneCallback(response);
+                    });
+            }
+
             /**
              * setup api request
              *
@@ -168,6 +187,7 @@ angular.module('pkfrontendApp')
                 getFeatureCollectionGeoJson: getFeatureCollectionGeoJson,
                 getFeatureCollectionFilterByLayer: getFeatureCollectionFilterByLayer,
                 getBbox: getBbox,
-                getDrawType: getDrawType
+                getDrawType: getDrawType,
+                getNLP: getNLP
             }
         }]);

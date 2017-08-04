@@ -3,8 +3,8 @@
 angular.module('pkfrontendApp')
     .directive('pkMaps', pkMaps);
 
-pkMaps.$inject = ["$q", "$compile", "olHelpers", "olMapDefaults", "olData", 'CONFIG', '$log'];
-function pkMaps($q, $compile, olHelpers, olMapDefaults, olData, CONFIG, $log) {
+pkMaps.$inject = ["$q", "$compile", "olHelpers", "olMapDefaults", "olData", 'CONFIG', '$log', 'svcLayer'];
+function pkMaps($q, $compile, olHelpers, olMapDefaults, olData, CONFIG, $log, svcLayer) {
     return {
         restrict: 'EA',
         transclude: true,
@@ -16,7 +16,8 @@ function pkMaps($q, $compile, olHelpers, olMapDefaults, olData, CONFIG, $log) {
             events: '=olEvents',
             drawtype: '=olDrawType',
             layerMode: '=olLayerMode',
-            properties: '=olProperties'
+            properties: '=olProperties',
+            mapScale: '=olMapScale'
         },
         template: '<div class="angular-openlayers-map" ng-transclude></div>',
         controller: ["$scope", function ($scope) {
@@ -87,7 +88,6 @@ function pkMaps($q, $compile, olHelpers, olMapDefaults, olData, CONFIG, $log) {
                 setMapFromGeoJson = true;
             }
 
-
             // Create the Openlayers Map Object with the options
             var map = new ol.Map({
                 layers: [
@@ -118,6 +118,8 @@ function pkMaps($q, $compile, olHelpers, olMapDefaults, olData, CONFIG, $log) {
             var ipo = 0, ils = 0, ipl = 0;
             var select = new ol.interaction.Select();
             var modify = new ol.interaction.Modify({features: select.getFeatures()});
+            var dType;
+            var mapScale;
 
             attrs.$observe('olLayerMode', function (value) {
                 map.removeInteraction(draw);
@@ -132,13 +134,13 @@ function pkMaps($q, $compile, olHelpers, olMapDefaults, olData, CONFIG, $log) {
                         selectedFeatures.forEach(selectedFeatures.remove, selectedFeatures);
                     });
                 } else {
-                    attrs.$observe('olDrawType', function (value) {
+                    attrs.$observe('olDrawType', function (value) {dType = value;console.log(dType);
                         map.removeInteraction(draw);
                         select.setActive(false);
                         modify.setActive(false);
                         value = value.replace("{0}", value).replace(/\'/g, '');
 
-                        if (value != "") {
+                        if (value != "" && value !== 'nlp') {
                             draw = addDrawInteraction(source, value, features);
                             map.addInteraction(draw);
                             map.addInteraction(addDrawModifyInteraction(features));
@@ -162,6 +164,37 @@ function pkMaps($q, $compile, olHelpers, olMapDefaults, olData, CONFIG, $log) {
                                 }
                                 $log.info("draw feature");
                             });
+                        } else if(value == 'nlp'){
+                            select.setActive(false);
+                            modify.setActive(false);
+                            var me = scope;
+                            attrs.$observe('olMapScale', function (scale) {
+                                mapScale = scale;
+                            });
+                            map.on("click", function(e){console.log(dType)
+                                if(dType.includes('nlp')){
+                                    var coordinates = ol.proj.transform(e.coordinate, "EPSG:3857", "EPSG:4326");
+                                    var data = {"type": "Feature", "geometry":{"type": "Polygon", "coordinates": [[[115.5,-2],[117,-2],[117,-1],[115.5,-1],[115.5,-2]]]},"properties":{"NLP":"1814"}};
+
+                                    var polygon = new ol.geom.Polygon(data.geometry.coordinates).transform("EPSG:4326", "EPSG:3857");
+                                    var nlpFeature = new ol.Feature({
+                                        geometry: polygon,
+                                        NLP: data.properties.NLP,
+                                        name: data.properties.NLP
+                                    });
+                                    layer.getSource().addFeature(nlpFeature);
+
+                                    svcLayer.getNLP(coordinates, mapScale.replace(/\'/g, ''), function(data){
+                                        var polygon = new ol.geom.Polygon(data.geometry.coordinates).transform("EPSG:4326", "EPSG:3857");
+                                        var nlpFeature = new ol.Feature({
+                                            geometry: polygon,
+                                            NLP: data.properties.NLP,
+                                            name: data.properties.NLP
+                                        });
+                                        layer.getSource().addFeature(nlpFeature);
+                                    });
+                                }
+                            })
                         }
                     });
                 }

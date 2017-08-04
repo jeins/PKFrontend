@@ -29,6 +29,8 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
         vm.layerGroupName = '';
         vm.description = '';
         vm.alerts = [];
+        vm.isNlpSelected = false;
+        vm.selectedNlpScale = '10k';
 
         svcWorkspace.getWorkspaces(function(result){
             vm.setWorkspaces = result.data;
@@ -71,8 +73,10 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
      * @param value
      */
     function selectedDrawType(value){
+        if(value === 'nlp') vm.isNlpSelected = true;
+        else vm.isNlpSelected = false;
         svcSharedProperties.sendBroadcast(function(v){
-            $scope.$emit('pk.draw.selectedDrawType', value);
+            $scope.$emit('pk.draw.selectedDrawType', {drawType: value, scale: vm.selectedNlpScale});
         });
     }
 

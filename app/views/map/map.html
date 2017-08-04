@@ -1,5 +1,5 @@
 <pk-maps id="pk-map" ol-properties="geoproperties" ng-class="CSN.mapClass"
-         ol-draw-type="'{{vm.drawType}}'" ol-layer-mode="'{{vm.isDrawOrModify}}'"
+         ol-draw-type="'{{vm.drawType}}'" ol-layer-mode="'{{vm.isDrawOrModify}}'" ol-map-scale="'{{vm.mapScale}}'"
          custom-layers="true"
          ol-center="indonesia" ol-defaults="defaults">
     <ol-layer ng-if="vm.layerModel == 'arcgis_indonesia'" ol-layer-properties="indomap"></ol-layer>
