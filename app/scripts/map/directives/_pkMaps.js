@@ -171,20 +171,12 @@ function pkMaps($q, $compile, olHelpers, olMapDefaults, olData, CONFIG, $log, sv
                             attrs.$observe('olMapScale', function (scale) {
                                 mapScale = scale;
                             });
-                            map.on("click", function(e){console.log(dType)
+                            map.on("click", function(e){
                                 if(dType.includes('nlp')){
                                     var coordinates = ol.proj.transform(e.coordinate, "EPSG:3857", "EPSG:4326");
-                                    var data = {"type": "Feature", "geometry":{"type": "Polygon", "coordinates": [[[115.5,-2],[117,-2],[117,-1],[115.5,-1],[115.5,-2]]]},"properties":{"NLP":"1814"}};
 
-                                    var polygon = new ol.geom.Polygon(data.geometry.coordinates).transform("EPSG:4326", "EPSG:3857");
-                                    var nlpFeature = new ol.Feature({
-                                        geometry: polygon,
-                                        NLP: data.properties.NLP,
-                                        name: data.properties.NLP
-                                    });
-                                    layer.getSource().addFeature(nlpFeature);
-
-                                    svcLayer.getNLP(coordinates, mapScale.replace(/\'/g, ''), function(data){
+                                    svcLayer.getNLP(coordinates, mapScale.replace(/\'/g, ''), function(response){
+                                        var data = response.data;
                                         var polygon = new ol.geom.Polygon(data.geometry.coordinates).transform("EPSG:4326", "EPSG:3857");
                                         var nlpFeature = new ol.Feature({
                                             geometry: polygon,

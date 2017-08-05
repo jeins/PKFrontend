@@ -21,7 +21,7 @@ function SideEditCtrl($scope, svcWorkspace, svcSharedProperties, $log, svcLayer)
         vm.alerts = [];
         vm.disabledDrawType = false;
         vm.isNlpSelected = false;
-        vm.selectedNlpScale = '10k';
+        vm.selectedNlpScale = '250k';
 
         $scope.$on('pk.edit.layerGroup', function(event, data){
             vm.disabledTextLayer = true;

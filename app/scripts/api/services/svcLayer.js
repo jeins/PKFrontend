@@ -143,7 +143,7 @@ angular.module('pkfrontendApp')
 
 
             function getNLP(coordinates, scale, doneCallback){
-                var serviceUrl = 'http://www.hariep.com/nlp/index.php?';
+                var serviceUrl = 'http://petakami.com/nlp-service.php?';
                 var request = {
                     op: "ll2nlp",
                     lat: coordinates[1],

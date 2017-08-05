@@ -30,7 +30,7 @@ function SideDrawCtrl($scope, $log, svcWorkspace, svcSharedProperties, svcLayer,
         vm.description = '';
         vm.alerts = [];
         vm.isNlpSelected = false;
-        vm.selectedNlpScale = '10k';
+        vm.selectedNlpScale = '250k';
 
         svcWorkspace.getWorkspaces(function(result){
             vm.setWorkspaces = result.data;
